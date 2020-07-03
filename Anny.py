@@ -15,33 +15,27 @@ colorama.init()
 def locate(ip):
 	json_data = requests.get(f'http://extreme-ip-lookup.com/json/{ip}').json()
 	print(Fore.RED + Style.DIM + '''╔════════════════════════════════════════════╗
-''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''IP: ''' + json_data['query'] + (' ' * (38 - int(len(json_data['query'])))) + Fore.RED + Style.DIM + ''' ║
-''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''Country: ''' + json_data['country'] + (' ' * (33 - int(len(json_data['country'])))) + Fore.RED + Style.DIM + ''' ║
-''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''City: ''' + json_data['city'] + (' ' * (36 - int(len(json_data['city'])))) + Fore.RED + Style.DIM + ''' ║
-''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''ISP: ''' + json_data['isp'] + (' ' * (37 - int(len(json_data['isp'])))) + Fore.RED + Style.DIM + ''' ║
-''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''Lat: ''' + json_data['lat'] + (' ' * (37 - int(len(json_data['lat'])))) + Fore.RED + Style.DIM + ''' ║
-''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''Lon: ''' + json_data['lon'] + (' ' * (37 - int(len(json_data['lon'])))) + Fore.RED + Style.DIM + ''' ║
+''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''IP''' + Fore.BLACK + ''':''' + Fore.WHITE+ ''' ''' + json_data['query'] + (' ' * (38 - int(len(json_data['query'])))) + Fore.RED + Style.DIM + ''' ║
+''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''Country''' + Fore.BLACK + ''':''' + Fore.WHITE+ ''' ''' + json_data['country'] + (' ' * (33 - int(len(json_data['country'])))) + Fore.RED + Style.DIM + ''' ║
+''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''City''' + Fore.BLACK + ''':''' + Fore.WHITE+ ''' ''' + json_data['city'] + (' ' * (36 - int(len(json_data['city'])))) + Fore.RED + Style.DIM + ''' ║
+''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''ISP''' + Fore.BLACK + ''':''' + Fore.WHITE+ ''' ''' + json_data['isp'] + (' ' * (37 - int(len(json_data['isp'])))) + Fore.RED + Style.DIM + ''' ║
+''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''Lat''' + Fore.BLACK + ''':''' + Fore.WHITE+ ''' ''' + json_data['lat'] + (' ' * (37 - int(len(json_data['lat'])))) + Fore.RED + Style.DIM + ''' ║
+''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''Lon''' + Fore.BLACK + ''':''' + Fore.WHITE+ ''' ''' + json_data['lon'] + (' ' * (37 - int(len(json_data['lon'])))) + Fore.RED + Style.DIM + ''' ║
 ''' + Fore.RED + Style.DIM + '''╚════════════════════════════════════════════╝''')
 
 
-banner = f'''
-{Fore.RED}.s5SSSs.      .s    s.      .s    s.      .s5 s.
-{Fore.RED}      SS.           SS.           SS.         SS.
-{Fore.RED}sS    S%S     sSs.  S%S     sSs.  S%S     ssS SSS
-{Fore.RED}SS    S%S     SS`S. S%S     SS`S. S%S     SSS SSS
-{Fore.RED}SSSs. S%S     SS `S.S%S     SS `S.S%S      SSSSS
-{Fore.RED}SS    S%S     SS  `sS%S     SS  `sS%S       SSS
-{Fore.RED}SS    `:;     SS    `:;     SS    `:;       `:;
-{Fore.RED}SS    ;,.     SS    ;,.     SS    ;,.       ;,.
-{Fore.RED}:;    ;:'     :;    ;:'     :;    ;:'       ;:'
+banner = f'''                                                                       
+{Fore.RED}{Style.DIM}.d8888b. 88d888b. 88d888b. dP    dP 
+{Fore.RED}{Style.DIM}88'  `88 88'  `88 88'  `88 88    88 
+{Fore.RED}{Style.DIM}88.  .88 88    88 88    88 88.  .88 
+{Fore.RED}{Style.DIM}`88888P8 dP    dP dP    dP `8888P88 
+{Fore.BLACK}{Style.BRIGHT}oooooooooooooooooooooooooooo~~~~{Fore.RED}{Style.DIM}.88{Fore.BLACK}{Style.BRIGHT}~
+                            {Fore.RED}{Style.DIM}d8888P{Style.BRIGHT}  
+{Fore.WHITE}AnyDesk {Fore.BLACK}{Style.BRIGHT}IP {Fore.WHITE}Resolver
 
-{Style.BRIGHT}{Fore.WHITE}     ANYDESK  {Style.BRIGHT}{Fore.BLACK}-  {Style.BRIGHT}{Fore.WHITE}IP  {Style.BRIGHT}{Fore.BLACK}-  {Style.BRIGHT}{Fore.WHITE}ADDRESS  {Style.BRIGHT}{Fore.BLACK}-  {Style.BRIGHT}{Fore.WHITE}RESOLVER
-{Style.DIM}{Fore.RED}╔═══════════════════════════════════════════════╗
-{Style.DIM}{Fore.RED}║ {Style.BRIGHT}{Fore.WHITE}GitHub{Style.BRIGHT}{Fore.BLACK}: {Style.BRIGHT}{Fore.WHITE}github.com/t0ast1337                  {Style.DIM}{Fore.RED}║
-{Style.DIM}{Fore.RED}║ {Style.BRIGHT}{Fore.WHITE}YouTube{Style.BRIGHT}{Fore.BLACK}: {Style.BRIGHT}{Fore.WHITE}youtube.com/iTsToastZ                {Style.DIM}{Fore.RED}║
-{Style.DIM}{Fore.RED}║ {Style.BRIGHT}{Fore.WHITE}Telegram{Style.BRIGHT}{Fore.BLACK}: {Style.BRIGHT}{Fore.WHITE}@haxx3r                             {Style.DIM}{Fore.RED}║
-{Style.DIM}{Fore.RED}╚═══════════════════════════════════════════════╝
-{Style.BRIGHT}{Fore.WHITE}
+{Fore.RED}{Style.DIM}youtube.com/itstoastz
+github.com/t0ast1337
+telegram.me/haxx3r{Fore.WHITE}{Style.BRIGHT}
 '''
 
 print(banner)
@@ -73,6 +67,7 @@ for line in anydesk_lines:
 for _ip in ips:
 	try:
 		ip = _ip.split(':')[0]
-		locate(ip)
+		if ip != '136.243.59.28':
+			locate(ip)
 	except Exception as e:
 		pass
