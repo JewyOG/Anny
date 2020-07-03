@@ -14,31 +14,15 @@ colorama.init()
 
 def locate(ip):
 	json_data = requests.get(f'http://extreme-ip-lookup.com/json/{ip}').json()
-	ip = json_data['query']
-	continent = json_data['continent']
-	country = json_data['country']
-	region = json_data['region']
-	city = json_data['city']
-	isp = json_data['isp']
-	lat = json_data['lat']
-	lon = json_data['lon']
-	space_ip = ' ' * (38 - int(len(ip)))
-	space_country = ' ' * (33 - int(len(country)))
-	space_city = ' ' * (36 - int(len(city)))
-	space_isp = ' ' * (37 - int(len(isp)))
-	space_lat = ' ' * (37 - int(len(lat)))
-	space_lon = ' ' * (37 - int(len(lon)))
-	message = f'''
-{Style.DIM}{Fore.RED}╔════════════════════════════════════════════╗
-{Style.DIM}{Fore.RED}║ {Style.BRIGHT}{Fore.WHITE}IP{Style.BRIGHT}{Fore.BLACK}: {Style.BRIGHT}{Fore.WHITE}{ip}{space_ip} {Style.DIM}{Fore.RED}║
-{Style.DIM}{Fore.RED}║ {Style.BRIGHT}{Fore.WHITE}Country{Style.BRIGHT}{Fore.BLACK}: {Style.BRIGHT}{Fore.WHITE}{country}{space_country} {Style.DIM}{Fore.RED}║
-{Style.DIM}{Fore.RED}║ {Style.BRIGHT}{Fore.WHITE}City{Style.BRIGHT}{Fore.BLACK}: {Style.BRIGHT}{Fore.WHITE}{city}{space_city} {Style.DIM}{Fore.RED}║
-{Style.DIM}{Fore.RED}║ {Style.BRIGHT}{Fore.WHITE}ISP{Style.BRIGHT}{Fore.BLACK}: {Style.BRIGHT}{Fore.WHITE}{isp}{space_isp} {Style.DIM}{Fore.RED}║
-{Style.DIM}{Fore.RED}║ {Style.BRIGHT}{Fore.WHITE}Lat{Style.BRIGHT}{Fore.BLACK}: {Style.BRIGHT}{Fore.WHITE}{lat}{space_lat} {Style.DIM}{Fore.RED}║
-{Style.DIM}{Fore.RED}║ {Style.BRIGHT}{Fore.WHITE}Lon{Style.BRIGHT}{Fore.BLACK}: {Style.BRIGHT}{Fore.WHITE}{lon}{space_lon} {Style.DIM}{Fore.RED}║
-{Style.DIM}{Fore.RED}╚════════════════════════════════════════════╝
-	'''
-	print(message)
+	print(Fore.RED + Style.DIM + '''╔════════════════════════════════════════════╗
+''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''IP: ''' + json_data['query'] + (' ' * (38 - int(len(json_data['query'])))) + Fore.RED + Style.DIM + ''' ║
+''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''Country: ''' + json_data['country'] + (' ' * (33 - int(len(json_data['country'])))) + Fore.RED + Style.DIM + ''' ║
+''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''City: ''' + json_data['city'] + (' ' * (36 - int(len(json_data['city'])))) + Fore.RED + Style.DIM + ''' ║
+''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''ISP: ''' + json_data['isp'] + (' ' * (37 - int(len(json_data['isp'])))) + Fore.RED + Style.DIM + ''' ║
+''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''Lat: ''' + json_data['lat'] + (' ' * (37 - int(len(json_data['lat'])))) + Fore.RED + Style.DIM + ''' ║
+''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''Lon: ''' + json_data['lon'] + (' ' * (37 - int(len(json_data['lon'])))) + Fore.RED + Style.DIM + ''' ║
+''' + Fore.RED + Style.DIM + '''╚════════════════════════════════════════════╝''')
+
 
 banner = f'''
 {Fore.RED}.s5SSSs.      .s    s.      .s    s.      .s5 s.
@@ -91,4 +75,4 @@ for _ip in ips:
 		ip = _ip.split(':')[0]
 		locate(ip)
 	except Exception as e:
-		print(e)
+		pass
