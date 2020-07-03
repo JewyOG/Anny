@@ -63,7 +63,7 @@ banner = f'''
 print(banner)
 
 output = subprocess.check_output("tasklist")
-if output.count('AnyDesk.exe') <= 3:
+if str(output).count('AnyDesk.exe') <= 3:
 	print('nobody is connected to ur session!')
 	exit()
 
