@@ -1,5 +1,5 @@
 # ONLY AUTHOR: t0ast1337 aka iTsToastZ
-# july 3rd 2020
+# july 4rd 2020 @ 11:29
 # youtube.com/itstoastz
 
 import subprocess
@@ -12,8 +12,9 @@ from colorama import *
 colorama.init()
 
 def locate(ip):
-	json_data = requests.get(f'http://extreme-ip-lookup.com/json/{ip}').json()
-	print(Fore.RED + Style.DIM + '''╔════════════════════════════════════════════╗
+	try:
+		json_data = requests.get(f'ahttp://extreme-ip-lookup.com/json/{ip}').json()
+		print(Fore.RED + Style.DIM + '''╔════════════════════════════════════════════╗
 ''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''IP''' + Fore.BLACK + ''':''' + Fore.WHITE+ ''' ''' + json_data['query'] + (' ' * (38 - int(len(json_data['query'])))) + Fore.RED + Style.DIM + ''' ║
 ''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''Country''' + Fore.BLACK + ''':''' + Fore.WHITE+ ''' ''' + json_data['country'] + (' ' * (33 - int(len(json_data['country'])))) + Fore.RED + Style.DIM + ''' ║
 ''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''City''' + Fore.BLACK + ''':''' + Fore.WHITE+ ''' ''' + json_data['city'] + (' ' * (36 - int(len(json_data['city'])))) + Fore.RED + Style.DIM + ''' ║
@@ -21,6 +22,12 @@ def locate(ip):
 ''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''Lat''' + Fore.BLACK + ''':''' + Fore.WHITE+ ''' ''' + json_data['lat'] + (' ' * (37 - int(len(json_data['lat'])))) + Fore.RED + Style.DIM + ''' ║
 ''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''Lon''' + Fore.BLACK + ''':''' + Fore.WHITE+ ''' ''' + json_data['lon'] + (' ' * (37 - int(len(json_data['lon'])))) + Fore.RED + Style.DIM + ''' ║
 ''' + Fore.RED + Style.DIM + '''╚════════════════════════════════════════════╝''')
+	except:
+		print('can\'t contact ip lookup api!')
+		print(Fore.RED + Style.DIM + '''╔════════════════════════════════════════════╗
+''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''IP''' + Fore.BLACK + ''':''' + Fore.WHITE+ ''' ''' + ip + (' ' * (38 - int(len(ip)))) + Fore.RED + Style.DIM + ''' ║
+''' + Fore.RED + Style.DIM + '''╚════════════════════════════════════════════╝''')
+
 
 
 banner = f'''                                                                       
@@ -45,18 +52,15 @@ while 1:
 		lines = str(subprocess.check_output("netstat -p TCP -n -o -a -b")).replace('b"', '"').replace('\\r', '').replace('\\n', '\n').split('\n')
 		n = 0
 		anydesk_lines = []
+		ips = []
 		for line in lines:
 			if '[AnyDesk.exe]' in line:
 				anydesk_lines.append(lines[n - 1])
 			n += 1
-	
-		ips = []
-	
 		for line in anydesk_lines:
 			if not '0.0.0.0' in line and 'ESTABLISHED' in line:
 				parts = line.split()
-				ips.append(parts[2])
-	
+				ips.append(parts[2])	
 		for _ip in ips:
 			try:
 				ip = _ip.split(':')[0]
@@ -71,4 +75,3 @@ while 1:
 			except Exception as e:
 				pass
 		exit()
-
