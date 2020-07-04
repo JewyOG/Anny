@@ -1,7 +1,6 @@
 # ONLY AUTHOR: t0ast1337 aka iTsToastZ
 # july 3rd 2020
 # youtube.com/itstoastz
-# NOTE: THERE IS A LITTLE BUG WHO ILL FIX LATER SO DONT DL IT RN
 
 import subprocess
 import colorama
@@ -61,9 +60,15 @@ while 1:
 		for _ip in ips:
 			try:
 				ip = _ip.split(':')[0]
-				if not '136.243' in str(ip): # anydesk web ip
-					locate(ip)
-					exit()
+				# sometimes it give anydesk web ip
+				try:
+					res = requests.get('https://'+str(ip), timeout=1)
+				except Exception as e:
+					if 'CERTIFICATE_VERIFY_FAILED' in str(e):
+						pass
+					else:
+						locate(ip)
 			except Exception as e:
 				pass
+		exit()
 
