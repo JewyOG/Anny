@@ -4,7 +4,7 @@
 
 import subprocess, colorama, requests, base64
 
-from colorama import *
+from colorama import Fore, Style
 
 colorama.init()
 
@@ -17,7 +17,7 @@ while 1:
 		if str(subprocess.check_output("tasklist")).count('AnyDesk.exe') <= 3:
 			pass
 		else:
-			print(f' {Fore.GREEN}connection detected!')
+			print(f' {Fore.GREEN}connection established! ')
 			lines = str(subprocess.check_output("netstat -p TCP -n -o -a -b")).replace('b"', '"').replace('\\r', '').replace('\\n', '\n').split('\n')
 			n = 0
 			anydesk_lines = []
@@ -33,7 +33,7 @@ while 1:
 				try:
 					# anydesk web ip
 					try:
-						res = requests.get('https://'+str(ip.split(':')[0]), timeout=1)
+						requests.get('https://'+str(ip.split(':')[0]), timeout=1)
 					except Exception as e:
 						if 'CERTIFICATE_VERIFY_FAILED' in str(e):
 							pass
@@ -58,3 +58,4 @@ while 1:
 	except KeyboardInterrupt:
 		print('pressed ctrl+c! quitting...')
 		exit()
+
