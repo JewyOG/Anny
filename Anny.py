@@ -5,8 +5,6 @@
 import subprocess
 import colorama
 import requests
-import socket
-import struct
 
 from colorama import *
 
@@ -23,7 +21,6 @@ def locate(ip):
 ''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''Lon''' + Fore.BLACK + ''':''' + Fore.WHITE+ ''' ''' + json_data['lon'] + (' ' * (37 - int(len(json_data['lon'])))) + Fore.RED + Style.DIM + ''' ║
 ''' + Fore.RED + Style.DIM + '''╚════════════════════════════════════════════╝''')
 
-
 banner = f'''                                                                       
 {Fore.RED}{Style.DIM}.d8888b. 88d888b. 88d888b. dP    dP 
 {Fore.RED}{Style.DIM}88'  `88 88'  `88 88'  `88 88    88 
@@ -39,35 +36,30 @@ telegram.me/haxx3r{Fore.WHITE}{Style.BRIGHT}
 '''
 
 print(banner)
-
-output = subprocess.check_output("tasklist")
-if str(output).count('AnyDesk.exe') <= 3:
-	print('nobody is connected to ur session!')
-	exit()
-
-raw = ''
-output = subprocess.check_output("netstat -p TCP -n -o -a -b")
-output = str(output).replace('b"', '"')
-output = str(output.replace('\\r', '').replace('\\n', '\n'))
-lines = output.split('\n')
-n = 0
-anydesk_lines = []
-for line in lines:
-	if '[AnyDesk.exe]' in line:
-		anydesk_lines.append(lines[n - 1])
-	n += 1
-
-ips = []
-
-for line in anydesk_lines:
-	if not '0.0.0.0' in line and 'ESTABLISHED' in line:
-		parts = line.split()
-		ips.append(parts[2])
-
-for _ip in ips:
-	try:
-		ip = _ip.split(':')[0]
-		if ip != '136.243.59.28':
-			locate(ip)
-	except Exception as e:
+print("waiting for connection...")
+while 1:
+	if str(subprocess.check_output("tasklist")).count('AnyDesk.exe') <= 3:
 		pass
+	
+	lines = str(subprocess.check_output("netstat -p TCP -n -o -a -b")).replace('b"', '"').replace('\\r', '').replace('\\n', '\n').split('\n')
+	n = 0
+	anydesk_lines = []
+	for line in lines:
+		if '[AnyDesk.exe]' in line:
+			anydesk_lines.append(lines[n - 1])
+		n += 1
+
+	ips = []
+
+	for line in anydesk_lines:
+		if not '0.0.0.0' in line and 'ESTABLISHED' in line:
+			parts = line.split()
+			ips.append(parts[2])
+
+	for _ip in ips:
+		try:
+			ip = _ip.split(':')[0]
+			if '136.243' in str(ip): # anydesk web ip
+			locate(ip)
+		except:
+			pass
