@@ -2,22 +2,45 @@
 # july 4rd 2020 @ 11:29
 # youtube.com/itstoastz
 
-import subprocess
-import colorama
-import requests
-import base64
-import sys
+import subprocess, colorama, requests, base64
 
 from colorama import *
 
 colorama.init()
 
+# banner
+print(base64.b64decode(b'G1sxbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgChtbMzFtLmQ4ODg4Yi4gODhkODg4Yi4gODhkODg4Yi4gZFAgICAgZFAgChtbMzFtODgnICBgODggODgnICBgODggODgnICBgODggODggICAgODggChtbMzFtODguICAuODggODggICAgODggODggICAgODggODguICAuODggChtbMzFtYDg4ODg4UDggZFAgICAgZFAgZFAgICAgZFAgYDg4ODhQODggCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgG1szMW0uODggChtbMzdtQW5ueSAbWzMwbS0bWzM3bSBBbnlEZXNrIElQIFJlc292bGVyICAgG1szMW1kODg4OFAgIAobWzM3bU1hZGUgYnkgZ2l0aHViLmNvbS90MGFzdDEzMzcK').decode() + "\nwaiting for connection...", end='')
 
-# i know this is ugly but i dont have the motivation to re code the banner & the locate function xD
-def locate(ip):
+# listener
+while 1:
 	try:
-		json_data = requests.get(f'http://extreme-ip-lookup.com/json/{ip}').json()
-		print('''
+		if str(subprocess.check_output("tasklist")).count('AnyDesk.exe') <= 3:
+			pass
+		else:
+			print(f' {Fore.GREEN}connection detected!')
+			lines = str(subprocess.check_output("netstat -p TCP -n -o -a -b")).replace('b"', '"').replace('\\r', '').replace('\\n', '\n').split('\n')
+			n = 0
+			anydesk_lines = []
+			ips = []
+			for line in lines:
+				if '[AnyDesk.exe]' in line:
+					anydesk_lines.append(lines[n - 1])
+				n += 1
+			for line in anydesk_lines:
+				if not '0.0.0.0' in line and 'ESTABLISHED' in line:
+					ips.append(line.split()[2])	
+			for ip in ips:
+				try:
+					# anydesk web ip
+					try:
+						res = requests.get('https://'+str(ip.split(':')[0]), timeout=1)
+					except Exception as e:
+						if 'CERTIFICATE_VERIFY_FAILED' in str(e):
+							pass
+						else:
+							try:
+								json_data = requests.get(f'http://extreme-ip-lookup.com/json/' + ip.split(':')[0]).json()
+								print('''
 {12}╔════════════════════════════════════════════╗
 {12}║ {13}IP{14}:{13} {0}{6} {12}║ 
 {12}║ {13}Country{14}:{13} {1}{7} {12}║ 
@@ -27,37 +50,11 @@ def locate(ip):
 {12}║ {13}Lon{14}:{13} {5}{11} {12}║ 
 {12}╚════════════════════════════════════════════╝
 		'''.format(json_data['query'], json_data['country'], json_data['city'], json_data['isp'], json_data['lat'], json_data['lon'], (' ' * (38 - int(len(json_data['query'])))), (' ' * (33 - int(len(json_data['country'])))), (' ' * (36 - int(len(json_data['city'])))), (' ' * (37 - int(len(json_data['isp'])))), (' ' * (37 - int(len(json_data['lat'])))), (' ' * (37 - int(len(json_data['lon'])))),Fore.RED, Fore.WHITE, Fore.BLACK))
-	except:
-		print('hum.')
-
-print(base64.b64decode(b'G1sxbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgChtbMzFtLmQ4ODg4Yi4gODhkODg4Yi4gODhkODg4Yi4gZFAgICAgZFAgChtbMzFtODgnICBgODggODgnICBgODggODgnICBgODggODggICAgODggChtbMzFtODguICAuODggODggICAgODggODggICAgODggODguICAuODggChtbMzFtYDg4ODg4UDggZFAgICAgZFAgZFAgICAgZFAgYDg4ODhQODggCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgG1szMW0uODggChtbMzdtQW5ueSAbWzMwbS0bWzM3bSBBbnlEZXNrIElQIFJlc292bGVyICAgG1szMW1kODg4OFAgIAobWzM3bU1hZGUgYnkgZ2l0aHViLmNvbS90MGFzdDEzMzcK').decode() + "\nwaiting for connection...")
-
-while 1:
-	if str(subprocess.check_output("tasklist")).count('AnyDesk.exe') <= 3:
-		pass
-	else:
-		lines = str(subprocess.check_output("netstat -p TCP -n -o -a -b")).replace('b"', '"').replace('\\r', '').replace('\\n', '\n').split('\n')
-		n = 0
-		anydesk_lines = []
-		ips = []
-		for line in lines:
-			if '[AnyDesk.exe]' in line:
-				anydesk_lines.append(lines[n - 1])
-			n += 1
-		for line in anydesk_lines:
-			if not '0.0.0.0' in line and 'ESTABLISHED' in line:
-				ips.append(line.split()[2])	
-		for _ip in ips:
-			try:
-				ip = _ip.split(':')[0]
-				# sometimes it give anydesk web ip
-				try:
-					res = requests.get('https://'+str(ip), timeout=1)
-				except Exception as e:
-					if 'CERTIFICATE_VERIFY_FAILED' in str(e):
-						pass
-					else:
-						locate(ip)
-			except Exception:
-				pass
+							except:
+								print('hum.')						
+				except Exception:
+					pass
+			exit()
+	except KeyboardInterrupt:
+		print('pressed ctrl+c! quitting...')
 		exit()
