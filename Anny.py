@@ -13,7 +13,7 @@ colorama.init()
 
 def locate(ip):
 	try:
-		json_data = requests.get(f'ahttp://extreme-ip-lookup.com/json/{ip}').json()
+		json_data = requests.get(f'http://extreme-ip-lookup.com/json/{ip}').json()
 		print(Fore.RED + Style.DIM + '''╔════════════════════════════════════════════╗
 ''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''IP''' + Fore.BLACK + ''':''' + Fore.WHITE+ ''' ''' + json_data['query'] + (' ' * (38 - int(len(json_data['query'])))) + Fore.RED + Style.DIM + ''' ║
 ''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''Country''' + Fore.BLACK + ''':''' + Fore.WHITE+ ''' ''' + json_data['country'] + (' ' * (33 - int(len(json_data['country'])))) + Fore.RED + Style.DIM + ''' ║
