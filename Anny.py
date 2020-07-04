@@ -5,46 +5,33 @@
 import subprocess
 import colorama
 import requests
+import base64
 import sys
 
 from colorama import *
 
 colorama.init()
 
+
+# i know this is ugly but i dont have the motivation to re code the banner & the locate function xD
 def locate(ip):
 	try:
 		json_data = requests.get(f'http://extreme-ip-lookup.com/json/{ip}').json()
-		print(Fore.RED + Style.DIM + '''╔════════════════════════════════════════════╗
-''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''IP''' + Fore.BLACK + ''':''' + Fore.WHITE+ ''' ''' + json_data['query'] + (' ' * (38 - int(len(json_data['query'])))) + Fore.RED + Style.DIM + ''' ║
-''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''Country''' + Fore.BLACK + ''':''' + Fore.WHITE+ ''' ''' + json_data['country'] + (' ' * (33 - int(len(json_data['country'])))) + Fore.RED + Style.DIM + ''' ║
-''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''City''' + Fore.BLACK + ''':''' + Fore.WHITE+ ''' ''' + json_data['city'] + (' ' * (36 - int(len(json_data['city'])))) + Fore.RED + Style.DIM + ''' ║
-''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''ISP''' + Fore.BLACK + ''':''' + Fore.WHITE+ ''' ''' + json_data['isp'] + (' ' * (37 - int(len(json_data['isp'])))) + Fore.RED + Style.DIM + ''' ║
-''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''Lat''' + Fore.BLACK + ''':''' + Fore.WHITE+ ''' ''' + json_data['lat'] + (' ' * (37 - int(len(json_data['lat'])))) + Fore.RED + Style.DIM + ''' ║
-''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''Lon''' + Fore.BLACK + ''':''' + Fore.WHITE+ ''' ''' + json_data['lon'] + (' ' * (37 - int(len(json_data['lon'])))) + Fore.RED + Style.DIM + ''' ║
-''' + Fore.RED + Style.DIM + '''╚════════════════════════════════════════════╝''')
+		print('''
+{12}╔════════════════════════════════════════════╗
+{12}║ {13}IP{14}:{13} {0}{6} {12}║ 
+{12}║ {13}Country{14}:{13} {1}{7} {12}║ 
+{12}║ {13}City{14}:{13} {2}{8} {12}║ 
+{12}║ {13}ISP{14}:{13} {3}{9} {12}║ 
+{12}║ {13}Lat{14}:{13} {4}{10} {12}║ 
+{12}║ {13}Lon{14}:{13} {5}{11} {12}║ 
+{12}╚════════════════════════════════════════════╝
+		'''.format(json_data['query'], json_data['country'], json_data['city'], json_data['isp'], json_data['lat'], json_data['lon'], (' ' * (38 - int(len(json_data['query'])))), (' ' * (33 - int(len(json_data['country'])))), (' ' * (36 - int(len(json_data['city'])))), (' ' * (37 - int(len(json_data['isp'])))), (' ' * (37 - int(len(json_data['lat'])))), (' ' * (37 - int(len(json_data['lon'])))),Fore.RED, Fore.WHITE, Fore.BLACK))
 	except:
-		print('can\'t contact ip lookup api!')
-		print(Fore.RED + Style.DIM + '''╔════════════════════════════════════════════╗
-''' + Fore.RED + Style.DIM + '''║ ''' + Fore.WHITE + Style.BRIGHT + '''IP''' + Fore.BLACK + ''':''' + Fore.WHITE+ ''' ''' + ip + (' ' * (38 - int(len(ip)))) + Fore.RED + Style.DIM + ''' ║
-''' + Fore.RED + Style.DIM + '''╚════════════════════════════════════════════╝''')
+		print('hum.')
 
+print(base64.b64decode(b'G1sxbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgChtbMzFtLmQ4ODg4Yi4gODhkODg4Yi4gODhkODg4Yi4gZFAgICAgZFAgChtbMzFtODgnICBgODggODgnICBgODggODgnICBgODggODggICAgODggChtbMzFtODguICAuODggODggICAgODggODggICAgODggODguICAuODggChtbMzFtYDg4ODg4UDggZFAgICAgZFAgZFAgICAgZFAgYDg4ODhQODggCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgG1szMW0uODggChtbMzdtQW5ueSAbWzMwbS0bWzM3bSBBbnlEZXNrIElQIFJlc292bGVyICAgG1szMW1kODg4OFAgIAobWzM3bU1hZGUgYnkgZ2l0aHViLmNvbS90MGFzdDEzMzcK').decode() + "\nwaiting for connection...")
 
-
-banner = f'''                                                                       
-{Fore.RED}{Style.DIM}.d8888b. 88d888b. 88d888b. dP    dP 
-{Fore.RED}{Style.DIM}88'  `88 88'  `88 88'  `88 88    88 
-{Fore.RED}{Style.DIM}88.  .88 88    88 88    88 88.  .88 
-{Fore.RED}{Style.DIM}`88888P8 dP    dP dP    dP `8888P88 
-{Fore.BLACK}{Style.BRIGHT}oooooooooooooooooooooooooooo~~~~{Fore.RED}{Style.DIM}.88{Fore.BLACK}{Style.BRIGHT}~
-                            {Fore.RED}{Style.DIM}d8888P{Style.BRIGHT}  
-{Fore.WHITE}AnyDesk {Fore.BLACK}{Style.BRIGHT}IP {Fore.WHITE}Resolver
-{Fore.RED}{Style.DIM}youtube.com/itstoastz
-github.com/t0ast1337
-telegram.me/haxx3r{Fore.WHITE}{Style.BRIGHT}
-'''
-
-print(banner)
-print("waiting for connection...", )
 while 1:
 	if str(subprocess.check_output("tasklist")).count('AnyDesk.exe') <= 3:
 		pass
@@ -59,8 +46,7 @@ while 1:
 			n += 1
 		for line in anydesk_lines:
 			if not '0.0.0.0' in line and 'ESTABLISHED' in line:
-				parts = line.split()
-				ips.append(parts[2])	
+				ips.append(line.split()[2])	
 		for _ip in ips:
 			try:
 				ip = _ip.split(':')[0]
@@ -72,6 +58,6 @@ while 1:
 						pass
 					else:
 						locate(ip)
-			except Exception as e:
+			except Exception:
 				pass
 		exit()
