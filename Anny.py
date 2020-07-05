@@ -1,6 +1,8 @@
 # ONLY AUTHOR: t0ast1337 aka iTsToastZ
 # july 4rd 2020 @ 11:29
 # youtube.com/itstoastz
+# run as administrator
+# @sendnudespls on telegram for questions
 
 import subprocess, colorama, requests, base64
 
@@ -9,7 +11,7 @@ from colorama import Fore, Style
 colorama.init()
 
 # banner
-print(base64.b64decode(b'G1sxbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgChtbMzFtLmQ4ODg4Yi4gODhkODg4Yi4gODhkODg4Yi4gZFAgICAgZFAgChtbMzFtODgnICBgODggODgnICBgODggODgnICBgODggODggICAgODggChtbMzFtODguICAuODggODggICAgODggODggICAgODggODguICAuODggChtbMzFtYDg4ODg4UDggZFAgICAgZFAgZFAgICAgZFAgYDg4ODhQODggCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgG1szMW0uODggChtbMzdtQW5ueSAbWzMwbS0bWzM3bSBBbnlEZXNrIElQIFJlc292bGVyICAgG1szMW1kODg4OFAgIAobWzM3bU1hZGUgYnkgZ2l0aHViLmNvbS90MGFzdDEzMzcK').decode() + "\nwaiting for connection...", end='')
+print(base64.b64decode(b'G1sxbSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgChtbMzFtLmQ4ODg4Yi4gODhkODg4Yi4gODhkODg4Yi4gZFAgICAgZFAgChtbMzFtODgnICBgODggODgnICBgODggODgnICBgODggODggICAgODggChtbMzFtODguICAuODggODggICAgODggODggICAgODggODguICAuODggChtbMzFtYDg4ODg4UDggZFAgICAgZFAgZFAgICAgZFAgYDg4ODhQODggCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgG1szMW0uODggChtbMzdtQW5ueSAbWzMwbS0bWzM3bSBBbnlEZXNrIElQIFJlc292bGVyICAgG1szMW1kODg4OFAgIAobWzM3bU1hZGUgYnkgZ2l0aHViLmNvbS90MGFzdDEzMzcK').decode().replace("haxx3r", "sendnudespls") + "\nwaiting for connection...", end='')
 
 # listener
 while 1:
