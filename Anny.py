@@ -24,13 +24,14 @@ print(base64.b64decode(b'G1szN20KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA
 
 while 1:
 	try:
-		if str(subprocess.check_output("tasklist")).count('AnyDesk.exe') <= 3:
+		if str(subprocess.check_output("tasklist")).count('AnyDesk') <= 3:
 			pass
 		else:
 			for line in str(subprocess.check_output("tasklist")).replace('b"', '"').replace('\\r', '').replace('\\n', '\n').split('\n'):
-				if 'AnyDesk.exe' in line:
+				if 'AnyDesk' in line:
 					try:
-						anydesk_pids.append(line.split()[1])
+						anydesk_pids.append(line.split('.exe')[1].split()[0].replace(' ', ''))
+						
 					except Exception as e:
 						pass
 			nstats_output_lines = str(subprocess.check_output('netstat -p TCP -n -a -o')).replace('b"', '"').replace('\\r', '').replace('\\n', '\n').split('\n')
@@ -45,9 +46,9 @@ while 1:
 							remote_port = parts[2].split(':')[1]
 							anydesk_address[remote_addr] = int(remote_port)
 						except Exception as e:
-							pass
+							print(e)
 			for ip, port in anydesk_address.items():
-				if int(port) > old_port:
+				if int(port) > old_port and not '169.254.' in ip:
 					old_port = int(port)
 					old_ip = ip
 			remote_ip = old_ip
@@ -55,7 +56,7 @@ while 1:
 			print(f'{Fore.GREEN} connection established!')
 			try:
 				json_data = requests.get(f'http://extreme-ip-lookup.com/json/' + remote_ip).json()
-				print('''
+				print(Style.BRIGHT + '''
 {12}╔════════════════════════════════════════════╗
 {12}║ {13}IP{14}:{13} {0}{6} {12}║ 
 {12}║ {13}Country{14}:{13} {1}{7} {12}║ 
@@ -66,7 +67,8 @@ while 1:
 {12}╚════════════════════════════════════════════╝
 				'''.format(json_data['query'], json_data['country'], json_data['city'], json_data['isp'], json_data['lat'], json_data['lon'], (' ' * (38 - int(len(json_data['query'])))), (' ' * (33 - int(len(json_data['country'])))), (' ' * (36 - int(len(json_data['city'])))), (' ' * (37 - int(len(json_data['isp'])))), (' ' * (37 - int(len(json_data['lat'])))), (' ' * (37 - int(len(json_data['lon'])))),Fore.RED, Fore.WHITE, Fore.BLACK))
 			except:
-				print('hum.')	
+				print('hum.')
+			input('press \'enter\' to continue...')
 			exit()
 	except KeyboardInterrupt:
 		print('ctrl+c'); exit()
